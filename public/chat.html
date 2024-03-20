@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the chat</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="js/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+                <i class="bx bxl-codepen"></i>
+                <span>Chat APP</span>
+            </div>
+            <i class="bx bx-menu" id="btn" onclick="myfunction()"></i>
+        </div>
+        <div class="user">
+            <img src="images/panther.jpg" alt="panther" class="user-img">
+            <div>
+                <p class="bold">Admin</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="#">
+                    <i class="bx bxs-user-circle"></i>
+                    <span class="nav-item">User1</span>
+
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bx bxs-user-pin"></i>
+                    <span class="nav-item">User2</span>
+
+                </a>
+
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bx bx-user"></i>
+                    <span class="nav-item">User 3</span>
+
+                </a>
+
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div class="container-1">
+            <h1>Welcome to the Chat APP</h1>
+        </div>
+        <div class="container-2">
+            
+            <form class="w-full max-w-sm" id="message-form">
+                <input class="form-message" type="text" name="message" placeholder="message">
+                <br><br>
+                <button class="flex-shrink bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  py-1 px-2 rounded  float-end " type="submit" id="submit-btn">Submit</button>
+            </form>
+            <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  py-1 px-2 rounded " type="button" id="send-location">Send Location</button>
+        </div>
+    </div>
+    <script id="message-template" type="text/template">
+        
+            <div class="message__title">
+                <h4 style="font-weight: bold"> {{from}} <i style="font-weight: 100">{{createdAt}}</i></h4>
+            </div>
+            <div class="message__body">
+                <p>{{text}}</p>
+            </div>
+    </script>
+    <script id="location-message-template" type="text/template">
+        
+            <div class="message__title">
+                <h4 style="font-weight: bold"> {{from}} <i style="font-weight: 100">{{createdAt}}</i></h4>
+            </div>
+            <div class="message__body">
+                <a href="{{url}}">My current location</a>
+            </div>
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/chat.js"></script>
+    <script type="text/javascript" src="js/libs/moment.js"></script>
+    <script type="text/javascript" src="js/libs/mustache.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js" ></script>
+
+   
+</body>
+
+</html>
