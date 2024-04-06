@@ -1,57 +1,71 @@
 let socket = io();
-let btn = document.querySelector('#btn')
-let sidebar = document.querySelector('.sidebar');
-function myfunction() {
-       sidebar.classList.toggle('active');
-}
+// let btn = document.querySelector('#btn')
+// let sidebar = document.querySelector('.sidebar');
+// function myfunction() {
+//        sidebar.classList.toggle('active');
+// }
 
 function scrollToButton(){
        let messages = document.querySelector('#messages').lastElementChild;
        messages.scrollIntoView();
 }
 
-
 socket.on('connect', function() {
 
        let searchQuery = window.location.search.substring(1);
-       let params = JSON.parse('{"' + decodeURI(searchQuery).replace(/&/g, '","').replace(/\+/g, '" "').replace(/=/g, '":"') + '"}');
+       let params = JSON.parse('{"' + decodeURI(searchQuery).replace(/&/g, '","').replace(/\+/g, ' ').replace(/=/g,'":"') + '"}');
 
        socket.emit('join', params, function(err) {
               if(err){
                      alert(err);
                      window.location.href = '/';
-              }else{
-                     console.log('No error');
               }
        })
 
 });
        
-       socket.on('disconnect', function() {
-        console.log('disconnected from server');
+socket.on('disconnect', function() {
+       console.log('disconnected from server');
+});
+
+socket.on('updateUsersList', function(users) {
+
+       let ol = document.createElement('ol');
+       
+       users.forEach(function(user) {
+              console.log(user);
+              let li = document.createElement('li');
+              li.innerHTML = user;
+              ol.appendChild(li);
        });
 
-       socket.on('newMessage', function(message) {
-              const formattedTime = moment(message.createdAt).format('LT')
-              const template = document.querySelector('#message-template').innerHTML;
-              const html = Mustache.render(template, {
-                     from: message.from,
-                     text: message.text,
-                     createdAt: formattedTime
-              });
+       let usersList = document.querySelector('#users-list');
+       usersList.innerHTML = "";
+       usersList.appendChild(ol);
+       console.log(usersList);
+});
 
-              const div = document.createElement('div');
-              div.innerHTML = html
-              // document.querySelector('#form-message').appendChild(div);
-              document.querySelector('.container-1').append(div);
-              scrollToButton();
-
-       //        const formattedTime = moment(message.createdAt).format('LT')
-       //        let li = document.createElement('li');
-       //        li.innerText = `${message.from} ${formattedTime} :${message.text}`
-
-       //  document.querySelector('.container-1').appendChild(li);
+socket.on('newMessage', function(message) {
+       const formattedTime = moment(message.createdAt).format('LT')
+       const template = document.querySelector('#message-template').innerHTML;
+       const html = Mustache.render(template, {
+              from: message.from,
+              text: message.text,
+              createdAt: formattedTime
        });
+
+       const div = document.createElement('div');
+       div.innerHTML = html
+       // document.querySelector('#form-message').appendChild(div);
+       document.querySelector('#messages').appendChild(div);
+       scrollToButton();
+
+//        const formattedTime = moment(message.createdAt).format('LT')
+//        let li = document.createElement('li');
+//        li.innerText = `${message.from} ${formattedTime} :${message.text}`
+
+//  document.querySelector('.container-1').appendChild(li);
+});
 
        socket.on('newLocationMessage', function(message) {
               const formattedTime = moment(message.createdAt).format('LT')
@@ -64,7 +78,7 @@ socket.on('connect', function() {
 
               const div = document.createElement('div');
               div.innerHTML = html
-              document.querySelector('.container-1').append(div);
+              document.querySelector('#messages').appendChild(div);
               scrollToButton();
 
        //        let li = document.createElement('li');
@@ -82,10 +96,9 @@ socket.on('connect', function() {
               e.preventDefault();
 
               socket.emit("createMessage", {
-                     from: "User",
                      text: document.querySelector('input[name="message"]').value
               }, function () {
-
+                     document.querySelector('input[name="message"]').value = '';
               });
        });
        document.querySelector('#send-location').addEventListener('click', function(e) {

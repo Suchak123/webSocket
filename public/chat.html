@@ -5,25 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to the chat</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="js/style.css">
+    <link rel="stylesheet"  type="text/css" href="static/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
-<body>
-
+<body class="chat">
+    <div class="chat__sidebar">
+        <h3>Members</h3>
+        <div id="users-list"></div>
+    </div>
     <div class="main-content mt-3 p-5 ">
-
         <div class="container-1">
             <h1>Welcome to the Chat APP</h1>
         </div>
+        
+        <ol id="messages" class="chat__messages"></ol>
         <div class="container-2">
             
             <form class="w-full max-w-sm" id="message-form">
-                <input class="form-message" type="text" name="message" placeholder="message">
-                <br><br>
-                <button class="flex-shrink bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  py-1 px-2 rounded  float-end " type="submit" id="submit-btn">Submit</button>
+                <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" name="message" placeholder="message" autofocus autocomplete="off">
+                
+                <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded float-right" type="submit" id="submit-btn">Submit</button>
             </form>
-            <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  py-1 px-2 rounded " type="button" id="send-location">Send Location</button>
+            <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded float-right" type="button" id="send-location">Send Location</button>
         </div>
     </div>
     <script id="message-template" type="text/template">
@@ -49,6 +53,7 @@
     <script type="text/javascript" src="js/libs/moment.js"></script>
     <script type="text/javascript" src="js/libs/mustache.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js" ></script>
+
 
    
 </body>

@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join ChatAPP</title>
-    <link rel="stylesheet" href="/public/js/style.css">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body>
     <div class="form-container">
         <form action="chat.html">
-            <div class="form-field"><h3>Join Chat</h3></div>
+            <h1 style="color:rgb(34, 34, 221)">Join Chat</h1>
             <div class="form-field">
-                <label>Display Name</label>
-                <input type="text" name="name" autofocus>
+                <label>Display Name: </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"type="text" name="name" autofocus>
             </div>
             <div class="form-field">
-                <label>Room Name</label>
-                <input type="text" name="room" autofocus>
+                <label>Room Name: </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" name="room" autofocus>
             </div>
             <div class="form-field">
-                <button>Join</button>
+                <button class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white  py-1 px-2 mt-3 rounded">Join</button>
             </div>
         </form>
     </div>
